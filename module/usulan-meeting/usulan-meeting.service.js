@@ -1,3 +1,5 @@
+const { Op } = require('sequelize')
+
 const model = require('./usulan-meeting.model')
 
 class UsulanMeetingService {
@@ -6,12 +8,12 @@ class UsulanMeetingService {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
     const where = {}
 
-    if (body.form['user_id']) {
-      where['user_id'] = body.form['user_id']
+    if (body.form['name']) {
+      where['name'] = { [Op.iLike]: `%${body.form['name']}%` }
     }
 
-    if (body.form['meeting_id']) {
-      where['meeting_id'] = body.form['meeting_id']
+    if (body.form['class_id']) {
+      where['class_id'] = body.form['class_id']
     }
 
     const offset = body.offset ? parseInt(body.offset) : 0

@@ -1,7 +1,7 @@
 const db = require('../../core/db')
 
 module.exports = db.sequelize.define(
-  'user_meeting_history',
+  'usulan_meeting',
   {
     id: {
       type: db.Sequelize.INTEGER,

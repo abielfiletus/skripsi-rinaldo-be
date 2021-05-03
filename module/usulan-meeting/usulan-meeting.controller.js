@@ -28,9 +28,11 @@ class UsulanMeetingController {
   async create(req, res, next) {
     try {
       const bulk = {
-        user_id: req.body.user_id ? req.body.user_id : null,
-        meeting_id: req.body.meeting_id ? req.body.meeting_id : null,
-        status: req.body.status ? req.body.status : null,
+        name: req.body.name ? req.body.name : null,
+        description: req.body.description ? req.body.description : null,
+        start_date: req.body.start_date ? req.body.start_date : null,
+        end_date: req.body.end_date ? req.body.end_date : null,
+        class_id: req.body.class_id ? req.body.class_id : null,
       }
 
       const data = await service.create(bulk)
@@ -44,9 +46,11 @@ class UsulanMeetingController {
   async update(req, res, next) {
     try {
       const bulk = {
-        user_id: req.body.user_id ? req.body.user_id : null,
-        meeting_id: req.body.meeting_id ? req.body.meeting_id : null,
-        status: req.body.status ? req.body.status : null,
+        name: req.body.name ? req.body.name : null,
+        description: req.body.description ? req.body.description : null,
+        start_date: req.body.start_date ? req.body.start_date : null,
+        end_date: req.body.end_date ? req.body.end_date : null,
+        class_id: req.body.class_id ? req.body.class_id : null,
       }
 
       const check = await service.getOne(req.params.id, true)
