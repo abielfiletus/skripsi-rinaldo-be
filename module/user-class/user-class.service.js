@@ -9,12 +9,16 @@ class UserClassService {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
     const where = {}
 
+    if (body.form['user_id']) {
+      where['user_id'] = body.form['user_id']
+    }
+
     if (body.form['start']) {
-      where['$class.start$'] = { [Op.gte]: body.form['start'] }
+      where['$class.start$'] = { [Op.lte]: body.form['start'] }
     }
 
     if (body.form['end']) {
-      where['$class.end$'] = { [Op.lte]: body.form['end'] }
+      where['$class.end$'] = { [Op.gte]: body.form['end'] }
     }
 
     const offset = body.offset ? parseInt(body.offset) : 0
