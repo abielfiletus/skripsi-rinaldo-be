@@ -74,9 +74,9 @@ class ClassController {
 
       if (!check) return outputParser.fail(res, 400, 'Validation Error', { code: 'Tidak ditemukan'}, '' )
 
-      const data = await service.register(check.id, req.body.user_id)
+      await service.register(check.id, req.body.user_id)
 
-      return outputParser.success(res, 200, 'Successfully Registered', data)
+      return outputParser.success(res, 200, 'Successfully Registered', check)
     } catch (err) {
       next(err)
     }
