@@ -36,7 +36,8 @@ class UserService {
   }
 
   async getOneByEmailPass(email, pass) {
-    const data = await model.findOne({ where: { email }, raw: true })
+    const include = { model: roleModel, as: 'role' }
+    const data = await model.findOne({ where: { email }, include, raw: true })
 
     if (!data) return { success: false, error: 'Kredensial tidak sesuai' }
 

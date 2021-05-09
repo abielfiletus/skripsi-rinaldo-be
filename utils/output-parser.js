@@ -3,8 +3,7 @@ require('dotenv').config()
 class OutputParser {
   fail(res, code, msg = null, err, errServer) {
     const json = {
-      // code: code,
-      // status: false,
+      status: false,
       error: err
     }
 
@@ -14,10 +13,7 @@ class OutputParser {
   }
 
   success(res, code, msg = null, data = null) {
-    const json = {
-      // code: code,
-      // status: true
-    }
+    const json = { status: true }
 
     if (msg) json['msg'] = msg
     if (data) json['data'] = data
