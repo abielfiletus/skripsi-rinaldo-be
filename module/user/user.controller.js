@@ -101,7 +101,8 @@ class UserController {
 
       if (!check.success) return outputParser.fail(res, 400, 'Validation Error', { email: 'Tidak terdaftar' }, '', '')
 
-      const data = await service.update(req.params.id, bulk)
+      await service.update(req.params.id, bulk)
+      const data = await service.getOne(req.params.id)
 
       return outputParser.success(res, 200, 'Successfully Update Data', data)
     } catch (err) {
