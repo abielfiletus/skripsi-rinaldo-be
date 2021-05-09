@@ -59,6 +59,10 @@ class UserService {
       bulk.password = bcrypt.hashSync(bulk.password, salt)
     }
 
+    Object.keys(bulk).map(el => {
+      if (!bulk[el]) delete bulk[el]
+    })
+
     return await model.update(bulk, { where: { id } })
   }
 
