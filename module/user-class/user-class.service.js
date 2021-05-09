@@ -1,7 +1,7 @@
 const { Op } = require('sequelize')
 
 const model = require('./user-class.model')
-const classModel = require('../user/user.model')
+const classModel = require('../class/class.model')
 
 class UserClassService {
 
