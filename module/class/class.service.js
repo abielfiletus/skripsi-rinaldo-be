@@ -2,7 +2,7 @@ const { Op } = require('sequelize')
 const uniqid = require('uniqid')
 
 const classModel = require('./class.model')
-const userClassModel = require('./user-class.model')
+const userClassModel = require('../user-class/user-class.model')
 
 class ClassService {
 
@@ -16,6 +16,14 @@ class ClassService {
 
     if (body.form['code']) {
       where['code'] = body.form['code']
+    }
+
+    if (body.form['start']) {
+      where['start'] = { [Op.gte]: body.form['start'] }
+    }
+
+    if (body.form['end']) {
+      where['end'] = { [Op.lte]: body.form['end'] }
     }
 
     const offset = body.offset ? parseInt(body.offset) : 0

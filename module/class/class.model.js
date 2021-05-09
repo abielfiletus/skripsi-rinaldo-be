@@ -15,6 +15,14 @@ module.exports = db.sequelize.define(
     code: {
       type: db.Sequelize.STRING,
       allowNull: false,
+    },
+    start: {
+      type: db.Sequelize.DATEONLY,
+      allowNull: false,
+    },
+    end: {
+      type: db.Sequelize.DATEONLY,
+      allowNull: false,
     }
   }
 )

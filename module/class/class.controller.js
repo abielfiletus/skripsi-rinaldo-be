@@ -27,7 +27,11 @@ class ClassController {
 
   async create(req, res, next) {
     try {
-      const bulk = { name: req.body.name }
+      const bulk = {
+        name: req.body.name ? req.body.name : null,
+        start: req.body.start ? req.body.start : null,
+        end: req.body.end ? req.body.end : null,
+      }
 
       const data = await service.create(bulk)
 
@@ -42,6 +46,8 @@ class ClassController {
       const bulk = {
         name: req.body.name ? req.body.name : null,
         code: req.body.code ? req.body.code : null,
+        start: req.body.start ? req.body.start : null,
+        end: req.body.end ? req.body.end : null,
       }
 
       const data = await service.update(req.params.id, bulk)

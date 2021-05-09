@@ -1,5 +1,5 @@
 const classModel = require('../module/class/class.model')
-const userClassModel = require('../module/class/user-class.model')
+const userClassModel = require('../module/user-class/user-class.model')
 const classMateriModel = require('../module/class-materi/class-materi.model')
 const classQuizModel = require('../module/class-quiz/class-quiz.model')
 const quizDetailModel = require('../module/class-quiz/quiz-detail.model')
