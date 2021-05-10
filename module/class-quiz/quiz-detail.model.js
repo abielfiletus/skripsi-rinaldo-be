@@ -13,7 +13,7 @@ module.exports = db.sequelize.define(
       allowNull: true,
     },
     soal: {
-      type: db.Sequelize.STRING,
+      type: db.Sequelize.TEXT,
       allowNull: false,
     },
     jawaban_a: {
