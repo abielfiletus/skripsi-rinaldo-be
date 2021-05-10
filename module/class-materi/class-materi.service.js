@@ -9,11 +9,11 @@ class ClassMateriService {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
     const where = []
 
-    if (body.form['name']) {
+    if (body.form && body.form.hasOwnProperty('name') && body.form['name']) {
       where.push(`cm.name iLike "%${body.form['name']}%"`)
     }
 
-    if (body.form['class_id']) {
+    if (body.form && body.form.hasOwnProperty('class_id') && body.form['class_id']) {
       where.push(`cm.class_id = "${body.form['name']}"`)
     }
 
