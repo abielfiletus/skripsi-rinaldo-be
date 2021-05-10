@@ -76,7 +76,7 @@ class ClassMateriController {
 
       if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
 
-      await file.mv('./assets/materi/' + clearName)
+      if (file) await file.mv('./assets/materi/' + clearName)
 
       const bulk = {
         name: req.body.name ? req.body.name : null,
