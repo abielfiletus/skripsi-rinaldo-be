@@ -31,6 +31,7 @@ class ClassController {
         name: req.body.name ? req.body.name : null,
         start: req.body.start ? req.body.start : null,
         end: req.body.end ? req.body.end : null,
+        nilai: req.body.nilai ? req.body.nilai : null,
       }
 
       const data = await service.create(bulk)

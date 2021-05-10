@@ -17,6 +17,7 @@ const userChosenMeetingRouter = require('./module/user-chosen-meeting/user-chose
 const userMeetingHistoryRouter = require('./module/user-meeting-history/user-meeting-history.route')
 const usulanMeetingRouter = require('./module/usulan-meeting/usulan-meeting.route')
 const userClassRouter = require('./module/user-class/user-class.route')
+const dashboardRouter = require('./module/dashboard/dashboard.route')
 const server = new Express()
 
 require('dotenv').config()
@@ -48,6 +49,7 @@ server.use('/api/user-chosen-meeting', userChosenMeetingRouter)
 server.use('/api/user-meeting-history', userMeetingHistoryRouter)
 server.use('/api/usulan-meeting', usulanMeetingRouter)
 server.use('/api/user-class', userClassRouter)
+server.use('/api/dashboard', dashboardRouter)
 
 server.use((req, res) => {
   return outputParser.fail(res, 404, 'Request path not found', '')
