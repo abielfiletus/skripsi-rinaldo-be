@@ -62,7 +62,7 @@ class ClassMateriController {
     let file;
     let clearName;
 
-    if (req.files.hasOwnProperty('materi') && req.files['materi']) {
+    if (req.files && req.files.hasOwnProperty('materi') && req.files['materi']) {
       file = req.files['materi']
       const ext = (path.extname(file.name)).toLowerCase()
 

@@ -84,7 +84,7 @@ class ClassQuizController {
     try {
       const data = await service.getRandSoal(req.params.id)
 
-      return outputParser.success(res, 200, 'Successfully Get Data', data)
+      return outputParser.success(res, 200, 'Successfully Get Data', [data])
     } catch (err) {
       next(err)
     }
