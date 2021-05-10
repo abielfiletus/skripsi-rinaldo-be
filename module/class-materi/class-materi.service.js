@@ -10,7 +10,7 @@ class ClassMateriService {
     const where = []
 
     if (body.form && body.form.hasOwnProperty('name') && body.form['name']) {
-      where.push(`cm.name iLike "%${body.form['name']}%"`)
+      where.push(`cm.name iLike '%${body.form['name']}%'`)
     }
 
     if (body.form && body.form.hasOwnProperty('class_id') && body.form['class_id']) {
