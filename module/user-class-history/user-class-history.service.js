@@ -4,14 +4,18 @@ class UserClassHistoryService {
 
   async getAll(body) {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
-    const where = {}
+    const where = []
 
     if (body.form['class_id']) {
-      where['class_id'] = body.form['class_id']
+      where.push(`class_id = ${body.form['class_id']}`)
     }
 
     if (body.form['user_id']) {
-      where['user_id'] = body.form['user_id']
+      where.push(`user_id = ${body.form['user_id']}`)
+    }
+
+    if (body.form['start']) {
+      where.push(`createdAt BETWEEN "${body.form['start']}" AND "${body.form['end']}"`)
     }
 
     return await model.sequelize.query(`SELECT DISTINCT uch.id, uch.status, uch.nilai, uch.durasi, uch.class_materi_id, cm.name as class_materi_name FROM user_class_history uch JOIN class_materi cm ON uch.class_materi_id = cm.id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY uch.class_materi_id ASC`)
