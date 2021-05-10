@@ -21,8 +21,8 @@ class UserClassHistoryService {
     return await model.findAll({where, offset, limit, order})
   }
 
-  async getOne(id) {
-    return await model.findOne({ where: { id } })
+  async getOne(id, raw=false) {
+    return await model.findOne({ where: { id }, raw })
   }
 
   async getOneByUserAndMateriId(user_id, class_materi_id) {

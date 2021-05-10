@@ -27,6 +27,8 @@ class UserClassHistoryController {
 
   async create(req, res, next) {
     try {
+      const check = await service.getOne(req.params.id, true)
+
       const bulk = {
         class_id: req.body.class_id ? req.body.class_id : null,
         user_id: req.body.user_id ? req.body.user_id : null,
@@ -37,7 +39,7 @@ class UserClassHistoryController {
         status: req.body.status ? req.body.status : null,
       }
 
-      const data = await service.create(bulk)
+      const data = check ? await service.update(check['id'], bulk) : await service.create(bulk)
 
       return outputParser.success(res, 201, 'Successfully Create Data', data)
     } catch (err) {
