@@ -7,11 +7,11 @@ class UserClassHistoryService {
     const where = []
 
     if (body.form['class_id']) {
-      where.push(`class_id = ${body.form['class_id']}`)
+      where.push(`uch.class_id = ${body.form['class_id']}`)
     }
 
     if (body.form['user_id']) {
-      where.push(`user_id = ${body.form['user_id']}`)
+      where.push(`uch.user_id = ${body.form['user_id']}`)
     }
 
     if (body.form['start']) {
