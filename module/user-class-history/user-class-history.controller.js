@@ -43,6 +43,10 @@ class UserClassHistoryController {
         status: req.body.status ? req.body.status : null,
       }
 
+      if (check) {
+        bulk.durasi = parseInt(bulk.durasi) + parseInt(check['durasi'])
+      }
+
       const data = check ? await service.update(check['id'], bulk) : await service.create(bulk)
 
       return outputParser.success(res, 201, 'Successfully Create Data', data)
@@ -53,7 +57,7 @@ class UserClassHistoryController {
 
   async update(req, res, next) {
     try {
-      const check = await service.getOne(req.params.id)
+      const check = await service.getOne(req.params.id, true)
 
       if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
 
@@ -62,7 +66,7 @@ class UserClassHistoryController {
         user_id: req.body.user_id ? req.body.user_id : null,
         class_materi_id: req.body.class_materi_id ? req.body.class_materi_id : null,
         class_quiz_id: req.body.class_quiz_id ? req.body.class_quiz_id : null,
-        durasi: req.body.durasi ? req.body.durasi : null,
+        durasi: req.body.durasi ? parseInt(req.body.durasi) + parseInt(check['durasi']) : null,
         nilai: req.body.nilai ? req.body.nilai : null,
         status: req.body.status ? req.body.status : null,
       }

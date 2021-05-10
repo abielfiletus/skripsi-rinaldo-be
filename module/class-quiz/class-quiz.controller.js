@@ -34,6 +34,7 @@ class ClassQuizController {
         nilai_lulus: req.body.nilai_lulus ? req.body.nilai_lulus : null,
         class_materi_id: req.body.class_materi_id ? req.body.class_materi_id : null,
         soal: req.body.soal ? req.body.soal : null,
+        tanggal_kumpul: req.body.tanggal_kumpul ? req.body.tanggal_kumpul : null,
       }
 
       const data = await service.create(bulk)
