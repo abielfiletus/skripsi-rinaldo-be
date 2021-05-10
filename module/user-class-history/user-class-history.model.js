@@ -22,7 +22,6 @@ module.exports = db.sequelize.define(
     },
     class_quiz_id: {
       type: db.Sequelize.INTEGER,
-      allowNull: false,
     },
     durasi: {
       type: db.Sequelize.INTEGER,
@@ -30,11 +29,9 @@ module.exports = db.sequelize.define(
     },
     nilai: {
       type: db.Sequelize.DOUBLE,
-      allowNull: false,
     },
     status: {
       type: db.Sequelize.STRING(20),
-      allowNull: false,
     }
   }
 )
