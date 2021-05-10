@@ -43,7 +43,7 @@ class ClassQuizService {
     const trx = await classQuizModel.sequelize.transaction()
 
     try {
-      const data = await classQuizModel.create(bulk)
+      const data = await classQuizModel.create(bulk, { fields: ['id','name','total_soal','nilai_lulus','class_materi_id','createdAt','updatedAt'] })
 
       if (bulk.soal) {
         bulk.soal.map(el => {
