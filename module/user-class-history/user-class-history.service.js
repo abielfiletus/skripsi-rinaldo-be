@@ -15,7 +15,7 @@ class UserClassHistoryService {
     }
 
     if (body.form['start']) {
-      where.push(`createdAt BETWEEN "${body.form['start']}" AND "${body.form['end']}"`)
+      where.push(`uch.createdAt BETWEEN "${body.form['start']}" AND "${body.form['end']}"`)
     }
 
     return await model.sequelize.query(`SELECT DISTINCT uch.id, uch.status, uch.nilai, uch.durasi, uch.class_materi_id, cm.name as class_materi_name FROM user_class_history uch JOIN class_materi cm ON uch.class_materi_id = cm.id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY uch.class_materi_id ASC`)
