@@ -27,7 +27,11 @@ class UserClassHistoryController {
 
   async create(req, res, next) {
     try {
-      const check = await service.getOne(req.params.id, true)
+      let check
+
+      if (req.body.id) {
+        check = await service.getOne(req.params.id, true)
+      }
 
       const bulk = {
         class_id: req.body.class_id ? req.body.class_id : null,
