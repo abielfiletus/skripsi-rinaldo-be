@@ -14,11 +14,7 @@ class UserClassHistoryService {
       where['user_id'] = body.form['user_id']
     }
 
-    const offset = body.offset ? parseInt(body.offset) : 0
-    const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
-    const order = [body.order ? body.order : ['id', 'ASC']]
-
-    return await model.findAll({where, offset, limit, order})
+    return await model.sequelize.query(`SELECT DISTINCT uch.id, uch.status, uch.nilai, uch.durasi, cm.name as class_materi_id FROM user_class_history uch JOIN class_materi cm ON uch.class_materi_id = cm.id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY uch.class_materi_id ASC`)
   }
 
   async getOne(id, raw=false) {
