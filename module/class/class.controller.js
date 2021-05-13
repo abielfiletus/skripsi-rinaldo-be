@@ -11,7 +11,7 @@ class ClassController {
 
       const data = await service.getAll(body)
 
-      return outputParser.success(res, 200, 'Successfully Get Data', data)
+      return outputParser.success(res, 200, 'Successfully Get Data', data[0])
     } catch (err) {
       next(err)
     }
