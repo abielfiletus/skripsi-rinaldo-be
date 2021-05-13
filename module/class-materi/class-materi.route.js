@@ -4,6 +4,7 @@ const controller = require('./class-materi.controller')
 const router = new Express.Router()
 
 router.get('/', controller.getAll)
+router.get('/teacher', controller.getAllTeacher)
 router.get('/:id', controller.getOne)
 
 router.post('/', controller.create)

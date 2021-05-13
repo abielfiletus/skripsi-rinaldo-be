@@ -19,6 +19,18 @@ class ClassMateriController {
     }
   }
 
+  async getAllTeacher(req, res, next) {
+    try {
+      const body = JSON.stringify(req.body) !== '{}' ? req.body : req.query
+
+      const data = await service.getAllTeacher(body)
+
+      return outputParser.success(res, 200, 'Successfully Get Data', data[0])
+    } catch (err) {
+      next(err)
+    }
+  }
+
   async getOne(req, res, next) {
     try {
       const data = await service.getOne(req.params.id)
