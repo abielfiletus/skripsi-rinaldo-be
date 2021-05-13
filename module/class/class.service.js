@@ -8,29 +8,25 @@ class ClassService {
 
   async getAll(body) {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
-    const where = {}
+    const where = []
 
     if (body.form['name']) {
-      where['name'] = { [Op.iLike]: `%${body.form['name']}%` }
+      where.push(`name iLike %${body.form['name']}%`)
     }
 
     if (body.form['code']) {
-      where['code'] = body.form['code']
+      where.push(`code = ${body.form['code']}`)
     }
 
     if (body.form['start']) {
-      where['start'] = { [Op.gte]: body.form['start'] }
+      where.push(`start >= ${body.form['start']}`)
     }
 
     if (body.form['end']) {
-      where['end'] = { [Op.lte]: body.form['end'] }
+      where.push(`end <= ${body.form['end']}`)
     }
 
-    const offset = body.offset ? parseInt(body.offset) : 0
-    const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
-    const order = [body.order ? body.order : ['id', 'ASC']]
-
-    return await classModel.findAll({where, offset, limit, order})
+    return classModel.sequelize.query(`SELECT c.id, c.name, c.code, c.end, c.start, c.nilai_lulus, count(DISTINCT uc.id) as studentTotal, count(DISTINCT cm.id) as materiTotal FROM class c LEFT OUTER JOIN user_class uc ON c.id = uc.class_id LEFT OUTER JOIN class_materi cm ON c.id = cm.class_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} GROUP BY 1 `)
   }
 
   async getOne(id) {
