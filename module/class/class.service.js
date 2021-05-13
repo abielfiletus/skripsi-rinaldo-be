@@ -26,7 +26,7 @@ class ClassService {
       where.push(`end <= ${body.form['end']}`)
     }
 
-    return classModel.sequelize.query(`SELECT c.id, c.name, c.code, c.end, c.start, c.nilai_lulus, count(DISTINCT uc.id) as studentTotal, count(DISTINCT cm.id) as materiTotal FROM class c LEFT OUTER JOIN user_class uc ON c.id = uc.class_id LEFT OUTER JOIN class_materi cm ON c.id = cm.class_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} GROUP BY 1 `)
+    return classModel.sequelize.query(`SELECT c.id, c.name, c.code, c.end, c.start, c.nilai_lulus, count(DISTINCT uc.id) as student_total, count(DISTINCT cm.id) as materi_total FROM class c LEFT OUTER JOIN user_class uc ON c.id = uc.class_id LEFT OUTER JOIN class_materi cm ON c.id = cm.class_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} GROUP BY 1 `)
   }
 
   async getOne(id) {
