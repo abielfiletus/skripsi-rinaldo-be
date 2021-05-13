@@ -23,6 +23,10 @@ module.exports = db.sequelize.define(
     end: {
       type: db.Sequelize.DATEONLY,
       allowNull: false,
+    },
+    createdBy: {
+      type: db.Sequelize.INTEGER,
+      allowNull: false,
     }
   }
 )

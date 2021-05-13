@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 const service = require('./class.service')
 const outputParser = require('../../utils/output-parser')
 
@@ -27,11 +29,15 @@ class ClassController {
 
   async create(req, res, next) {
     try {
+      const token = req.headers.authorization.split(' ')
+      const user = jwt.decode(token[1])
+
       const bulk = {
         name: req.body.name ? req.body.name : null,
         start: req.body.start ? req.body.start : null,
         end: req.body.end ? req.body.end : null,
         nilai: req.body.nilai ? req.body.nilai : null,
+        createdBy: user,
       }
 
       const data = await service.create(bulk)
