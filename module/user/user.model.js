@@ -18,7 +18,6 @@ module.exports = db.sequelize.define(
     },
     nis: {
       type: db.Sequelize.STRING(20),
-      allowNull: false,
     },
     tanggal_lahir: {
       type: db.Sequelize.DATE,
