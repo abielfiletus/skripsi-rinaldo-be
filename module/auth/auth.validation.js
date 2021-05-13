@@ -37,15 +37,6 @@ module.exports = {
         .bail()
         .escape()
         .trim(),
-      check('nis')
-        .notEmpty()
-        .withMessage('harus terisi')
-        .bail()
-        .isLength({max: 20})
-        .withMessage('maksimal 20 karakter')
-        .bail()
-        .escape()
-        .trim(),
       check('tanggal_lahir')
         .notEmpty()
         .withMessage('harus terisi')
