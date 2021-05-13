@@ -14,6 +14,10 @@ class ClassService {
       where.push(`name iLike %${body.form['name']}%`)
     }
 
+    if (body.form['user_id']) {
+      where.push(`createdBy = ${body.form['user_id']}`)
+    }
+
     if (body.form['code']) {
       where.push(`code = ${body.form['code']}`)
     }
