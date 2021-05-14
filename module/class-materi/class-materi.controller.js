@@ -96,9 +96,9 @@ class ClassMateriController {
         class_id: req.body.class_id ? req.body.class_id : null,
       }
 
-      const data = await service.update(req.params.id, bulk)
+      await service.update(req.params.id, bulk)
 
-      return outputParser.success(res, 200, 'Successfully Edit Data', data)
+      return outputParser.success(res, 200, 'Successfully Edit Data', check)
     } catch (err) {
       if (clearName && fs.existsSync('./assets/materi/' + clearName)) {
         fs.removeSync('./assets/materi/' + clearName)
