@@ -32,7 +32,7 @@ class ClassMateriService {
       where.push(`cm.class_id = ${body.form['class_id']}`)
     }
 
-    return await model.sequelize.query(`SELECT DISTINCT cm.id, cm.name, cm.path, cm.class_id, c.name as class_name, cq.id as quiz_id, cq.name as quiz_name, cq.total_soal as quiz_total_soal, cq.nilai_lulus as quiz_nilai_lulus, cq.class_materi_id, cq.tanggal_kumpul FROM class_materi cm JOIN class c ON cm.class_id = c.id LEFT OUTER JOIN class_quiz cq ON cm.id = cq.class_materi_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY cm.id DESC`);
+    return await model.sequelize.query(`SELECT DISTINCT cm.id, cm.name, cm.path, cm.class_id, c.name as class_name, cq.id as quiz_id, cq.name as quiz_name, cq.total_soal as quiz_total_soal, cq.nilai_lulus as quiz_nilai_lulus, cq.class_materi_id, cq.tanggal_kumpul FROM class_materi cm JOIN class c ON cm.class_id = c.id LEFT OUTER JOIN class_quiz cq ON cm.id = cq.class_materi_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY cm.id ASC`);
   }
 
   async getOne(id) {
