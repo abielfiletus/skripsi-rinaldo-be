@@ -24,6 +24,10 @@ module.exports = db.sequelize.define(
       type: db.Sequelize.DATEONLY,
       allowNull: false,
     },
+    nilai_lulus: {
+      type: db.Sequelize.INTEGER,
+      allowNull: false,
+    },
     createdBy: {
       type: db.Sequelize.INTEGER,
       allowNull: false,
