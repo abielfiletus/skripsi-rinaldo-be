@@ -36,7 +36,7 @@ class ClassController {
         name: req.body.name ? req.body.name : null,
         start: req.body.start ? req.body.start : null,
         end: req.body.end ? req.body.end : null,
-        nilai: req.body.nilai ? req.body.nilai : null,
+        nilai_lulus: req.body.nilai_lulus ? req.body.nilai_lulus : null,
         createdBy: user,
       }
 
@@ -55,6 +55,7 @@ class ClassController {
         code: req.body.code ? req.body.code : null,
         start: req.body.start ? req.body.start : null,
         end: req.body.end ? req.body.end : null,
+        nilai_lulus: req.body.nilai_lulus ? req.body.nilai_lulus : null,
       }
 
       const data = await service.update(req.params.id, bulk)
