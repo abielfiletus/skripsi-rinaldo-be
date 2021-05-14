@@ -115,6 +115,10 @@ class ClassMateriController {
       if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
 
       const data = await service.delete(req.params.id)
+      const path = check['path'].replaceAll(new RegExp(process.env.SITE_URL, 'g'), '');
+      if (fs.existsSync(`./${path}`)) {
+        fs.removeSync(`./${path}`)
+      }
 
       return outputParser.success(res, 200, 'Successfully Delete Data', data)
     } catch (err) {
