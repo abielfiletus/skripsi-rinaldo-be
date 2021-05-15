@@ -23,6 +23,9 @@ module.exports = db.sequelize.define(
     class_materi_id: {
       type: db.Sequelize.INTEGER,
       allowNull: false,
+    },
+    tanggal_kumpul: {
+      type: db.Sequelize.DATEONLY,
     }
   }
 )
