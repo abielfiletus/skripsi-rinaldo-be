@@ -18,21 +18,17 @@ class ClassQuizService {
 
   async getAll(body) {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
-    const where = {}
+    const where = []
 
     if (body.form['name']) {
-      where['name'] = { [Op.iLike]: body.form['name'] }
+      where.push(`cq.name iLike '%${body.form['name']}%'`)
     }
 
     if (body.form['class_materi_id']) {
-      where['class_materi_id'] = body.form['class_materi_id']
+      where.push(`qd.class_materi_id = ${body.form['class_materi_id']}`)
     }
 
-    const offset = body.offset ? parseInt(body.offset) : 0
-    const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
-    const order = [body.order ? body.order : ['id', 'ASC']]
-
-    return await classQuizModel.findAll({where, offset, limit, order})
+    return await classQuizModel.sequelize.query(`SELECT qd.class_quiz_id, qd.id, qd.soal, qd.jawaban_a, qd.jawaban_b, qd.jawaban_c, qd.jawaban_d, qd.jawaban_e, qd.jawaban_benar FROM class_quiz cq INNER JOIN quiz_detail qd ON cq.id = qd.class_quiz_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''}`)
   }
 
   async getOne(id, raw=false) {
