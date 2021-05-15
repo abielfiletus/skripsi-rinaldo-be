@@ -100,6 +100,7 @@ class ClassQuizService {
       await trx.commit()
       return data
     } catch (err) {
+      console.log(err)
       await trx.rollback()
       return false
     }
