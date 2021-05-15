@@ -94,13 +94,12 @@ class ClassQuizService {
     const trx = await classQuizModel.sequelize.transaction()
 
     try {
-      await quizDetailModel.destroy({ where: { class_materi_id: id } })
+      await quizDetailModel.destroy({ where: { class_quiz_id: id } })
       const data = classQuizModel.destroy({ where: { id } })
 
       await trx.commit()
       return data
     } catch (err) {
-      console.log(err)
       await trx.rollback()
       return false
     }
