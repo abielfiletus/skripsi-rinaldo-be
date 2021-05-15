@@ -35,6 +35,10 @@ class ClassQuizService {
     return await classQuizModel.findOne({ where: { id }, raw })
   }
 
+  async getOneDetailSoal(id, raw=false) {
+    return await quizDetailModel.findOne({ where: { id }, raw })
+  }
+
   async create(bulk) {
     return classQuizModel.create(bulk)
     // const trx = await classQuizModel.sequelize.transaction()

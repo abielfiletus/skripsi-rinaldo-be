@@ -26,6 +26,16 @@ class ClassQuizController {
     }
   }
 
+  async getOneDetailSoal(req, res, next) {
+    try {
+      const data = await service.getOne(req.params.id)
+
+      return outputParser.success(res, 200, 'Successfully Get Data', data)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   async create(req, res, next) {
     try {
       const bulk = {
