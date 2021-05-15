@@ -46,6 +46,10 @@ class ClassQuizController {
 
   async createDetailSoal(req, res, next) {
     try {
+      const check = await service.getOne(req.body.class_quiz_id, true)
+
+      if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
+
       const bulk = {
         class_quiz_id: req.body.class_quiz_id ? req.body.class_quiz_id : null,
         soal: req.body.soal ? req.body.soal : null,
@@ -58,6 +62,7 @@ class ClassQuizController {
       }
 
       const data = await service.createDetailSoal(bulk)
+      await service.update(req.body.class_quiz_id, { total_soal: check['total_soal'] + 1 })
 
       return outputParser.success(res, 201, 'Successfully Create Data', data)
     } catch (err) {
