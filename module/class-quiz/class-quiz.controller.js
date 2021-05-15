@@ -68,7 +68,7 @@ class ClassQuizController {
         jawaban_c: req.body.jawaban_c ? req.body.jawaban_c : null,
         jawaban_d: req.body.jawaban_d ? req.body.jawaban_d : null,
         jawaban_e: req.body.jawaban_e ? req.body.jawaban_e : null,
-        jawban_benar: req.body.jawban_benar ? req.body.jawban_benar : null,
+        jawaban_benar: req.body.jawaban_benar ? req.body.jawaban_benar : null,
       }
 
       const data = await service.createDetailSoal(bulk)
