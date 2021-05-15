@@ -119,7 +119,7 @@ class ClassQuizController {
 
   async deleteSoal(req, res, next) {
     try {
-      const check = await service.getOne(req.params.id)
+      const check = await service.getOneDetailSoal(req.params.id)
 
       if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
 
