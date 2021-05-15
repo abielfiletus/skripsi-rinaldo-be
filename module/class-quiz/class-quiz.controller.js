@@ -28,7 +28,7 @@ class ClassQuizController {
 
   async getOneDetailSoal(req, res, next) {
     try {
-      const data = await service.getOne(req.params.id)
+      const data = await service.getOneDetailSoal(req.params.id)
 
       return outputParser.success(res, 200, 'Successfully Get Data', data)
     } catch (err) {
