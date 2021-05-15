@@ -13,5 +13,6 @@ router.post('/detail-quiz', controller.createDetailSoal)
 router.post('/submit-quiz', controller.submitQuiz)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
+router.delete('/quiz-detail/:id', controller.deleteSoal)
 
 module.exports = router

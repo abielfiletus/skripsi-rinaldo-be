@@ -116,6 +116,21 @@ class ClassQuizController {
     }
   }
 
+
+  async deleteSoal(req, res, next) {
+    try {
+      const check = await service.getOne(req.params.id)
+
+      if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
+
+      const data = await service.deleteSoal(req.params.id)
+
+      return outputParser.success(res, 200, 'Successfully Delete Data', data)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   async getRandQuiz(req, res, next) {
     try {
       const data = await service.getRandSoal(req.params.id)

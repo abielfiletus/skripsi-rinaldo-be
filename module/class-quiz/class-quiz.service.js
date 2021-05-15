@@ -109,6 +109,10 @@ class ClassQuizService {
     }
   }
 
+  async deleteSoal(id) {
+    return quizDetailModel.destroy({ where: { id } })
+  }
+
   async getSoalArray(id) {
     return await quizDetailModel.findAll({ where: { id: { [Op.in]: id } }, raw: true })
   }
