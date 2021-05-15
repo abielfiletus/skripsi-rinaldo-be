@@ -39,6 +39,9 @@ module.exports = db.sequelize.define(
     jawaban_benar: {
       type: db.Sequelize.STRING(1),
       allowNull: false,
+    },
+    tanggal_kumpul: {
+      type: db.Sequelize.DATEONLY,
     }
   }
 )
