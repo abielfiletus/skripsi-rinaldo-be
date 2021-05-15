@@ -24,8 +24,8 @@ class ClassQuizService {
       where.push(`cq.name iLike '%${body.form['name']}%'`)
     }
 
-    if (body.form['class_materi_id']) {
-      where.push(`qd.class_materi_id = ${body.form['class_materi_id']}`)
+    if (body.form['class_quiz_id']) {
+      where.push(`qd.class_quiz_id = ${body.form['class_quiz_id']}`)
     }
 
     return await classQuizModel.sequelize.query(`SELECT qd.class_quiz_id, qd.id, qd.soal, qd.jawaban_a, qd.jawaban_b, qd.jawaban_c, qd.jawaban_d, qd.jawaban_e, qd.jawaban_benar FROM class_quiz cq INNER JOIN quiz_detail qd ON cq.id = qd.class_quiz_id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''}`)
