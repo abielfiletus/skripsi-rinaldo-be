@@ -30,14 +30,34 @@ class ClassQuizController {
     try {
       const bulk = {
         name: req.body.name ? req.body.name : null,
-        total_soal: req.body.total_soal ? req.body.total_soal : null,
+        total_soal: 0,
         nilai_lulus: req.body.nilai_lulus ? req.body.nilai_lulus : null,
         class_materi_id: req.body.class_materi_id ? req.body.class_materi_id : null,
-        soal: req.body.soal ? req.body.soal : null,
         tanggal_kumpul: req.body.tanggal_kumpul ? req.body.tanggal_kumpul : null,
       }
 
       const data = await service.create(bulk)
+
+      return outputParser.success(res, 201, 'Successfully Create Data', data)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async createDetailSoal(req, res, next) {
+    try {
+      const bulk = {
+        class_quiz_id: req.body.class_quiz_id ? req.body.class_quiz_id : null,
+        soal: req.body.soal ? req.body.soal : null,
+        jawaban_a: req.body.jawaban_a ? req.body.jawaban_a : null,
+        jawaban_b: req.body.jawaban_b ? req.body.jawaban_b : null,
+        jawaban_c: req.body.jawaban_c ? req.body.jawaban_c : null,
+        jawaban_d: req.body.jawaban_d ? req.body.jawaban_d : null,
+        jawaban_e: req.body.jawaban_e ? req.body.jawaban_e : null,
+        jawban_benar: req.body.jawban_benar ? req.body.jawban_benar : null,
+      }
+
+      const data = await service.createDetailSoal(bulk)
 
       return outputParser.success(res, 201, 'Successfully Create Data', data)
     } catch (err) {

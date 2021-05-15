@@ -36,28 +36,33 @@ class ClassQuizService {
   }
 
   async create(bulk) {
-    const trx = await classQuizModel.sequelize.transaction()
+    return classQuizModel.create(bulk)
+    // const trx = await classQuizModel.sequelize.transaction()
+    //
+    // try {
+    //   const data = await classQuizModel.create(bulk)
+    //
+    //   if (bulk.soal) {
+    //     bulk.soal.map(el => {
+    //       el.class_quiz_id = data.getDataValue('id')
+    //     })
+    //
+    //     await quizDetailModel.bulkCreate(bulk.soal)
+    //
+    //     delete bulk.soal
+    //   }
+    //
+    //   await trx.commit()
+    //
+    //   return data
+    // } catch (err) {
+    //   console.log(err)
+    //   await trx.rollback()
+    // }
+  }
 
-    try {
-      const data = await classQuizModel.create(bulk)
-
-      if (bulk.soal) {
-        bulk.soal.map(el => {
-          el.class_quiz_id = data.getDataValue('id')
-        })
-
-        await quizDetailModel.bulkCreate(bulk.soal)
-
-        delete bulk.soal
-      }
-
-      await trx.commit()
-
-      return data
-    } catch (err) {
-      console.log(err)
-      await trx.rollback()
-    }
+  async createDetailSoal(bulk) {
+    return quizDetailModel.create(bulk);
   }
 
   async update(id, bulk) {

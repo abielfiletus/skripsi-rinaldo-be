@@ -8,6 +8,7 @@ router.get('/:id', controller.getOne)
 router.get('/random-quiz/:id', controller.getRandQuiz)
 
 router.post('/', controller.create)
+router.post('/detail-quiz', controller.createDetailSoal)
 router.post('/submit-quiz', controller.submitQuiz)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
