@@ -25,7 +25,7 @@ class UserClassService {
     const offset = body.offset ? parseInt(body.offset) : 0
     const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
     const order = [body.order ? body.order : ['id', 'ASC']]
-    const include = { model: classModel, as: 'class' }
+    const include = [{ model: classModel, as: 'class' }]
 
     if (body.form['include_user']) {
       include.push({ model: userModel, as: 'user', attributes: { exclude: ['password'] } })
