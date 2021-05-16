@@ -38,6 +38,14 @@ class UserClassService {
     return await model.findAll({where, offset, limit, order, include})
   }
 
+  async getOne(id, raw=false) {
+    return await model.findOne({ where: { id }, raw })
+  }
+
+  async delete(id) {
+    return await model.destroy({ where: { id } })
+  }
+
 }
 
 module.exports = new UserClassService()

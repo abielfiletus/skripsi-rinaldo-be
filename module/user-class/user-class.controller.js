@@ -15,6 +15,14 @@ class UserClassController {
     }
   }
 
+  async delete(req, res, next) {
+    try {
+      const check = await service
+    } catch (err) {
+      next(err)
+    }
+  }
+
 }
 
 module.exports = new UserClassController()
