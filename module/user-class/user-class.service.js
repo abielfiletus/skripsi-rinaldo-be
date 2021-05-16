@@ -2,6 +2,7 @@ const { Op } = require('sequelize')
 
 const model = require('./user-class.model')
 const classModel = require('../class/class.model')
+const userModel = require('../user/user.model')
 
 class UserClassService {
 
@@ -25,6 +26,10 @@ class UserClassService {
     const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
     const order = [body.order ? body.order : ['id', 'ASC']]
     const include = { model: classModel, as: 'class' }
+
+    if (body.form['include_user']) {
+      include.push({ model: userModel, as: 'user' })
+    }
 
     return await model.findAll({where, offset, limit, order, include})
   }
