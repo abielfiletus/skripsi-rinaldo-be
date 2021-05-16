@@ -28,7 +28,7 @@ class UserClassService {
     const include = { model: classModel, as: 'class' }
 
     if (body.form['include_user']) {
-      include.push({ model: userModel, as: 'user' })
+      include.push({ model: userModel, as: 'user', attributes: { exclude: ['password'] } })
     }
 
     return await model.findAll({where, offset, limit, order, include})
