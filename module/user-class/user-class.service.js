@@ -14,6 +14,10 @@ class UserClassService {
       where['user_id'] = body.form['user_id']
     }
 
+    if (body.form['class_id']) {
+      where['$class.id$'] = body.form['class_id']
+    }
+
     if (body.form['start']) {
       where['$class.start$'] = { [Op.lte]: body.form['start'] }
     }
