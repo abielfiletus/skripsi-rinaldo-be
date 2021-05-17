@@ -19,6 +19,9 @@ module.exports = db.sequelize.define(
     end_date: {
       type: db.Sequelize.DATEONLY,
       allowNull: false,
+    },
+    link: {
+      type: db.Sequelize.STRING,
     }
   }
 )

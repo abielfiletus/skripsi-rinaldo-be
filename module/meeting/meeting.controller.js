@@ -31,6 +31,7 @@ class MeetingController {
         class_id: req.body.class_id ? req.body.class_id : null,
         start_date: req.body.start_date ? req.body.start_date : null,
         end_date: req.body.end_date ? req.body.end_date : null,
+        link: req.body.link_meeting ? req.body.link_meeting : null,
       }
 
       const data = await service.create(bulk)
@@ -47,6 +48,7 @@ class MeetingController {
         class_id: req.body.class_id ? req.body.class_id : null,
         start_date: req.body.start_date ? req.body.start_date : null,
         end_date: req.body.end_date ? req.body.end_date : null,
+        link: req.body.link_meeting ? req.body.link_meeting : null,
       }
 
       const check = await service.getOne(req.params.id, true)
