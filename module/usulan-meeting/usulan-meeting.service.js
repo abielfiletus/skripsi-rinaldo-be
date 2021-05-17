@@ -39,6 +39,7 @@ class UsulanMeetingService {
             usulan_meeting_id: id
           })
         })
+        console.log(userData)
 
         await userChosenMeetingModel.bulkCreate(userData, { transaction: trx })
       }
