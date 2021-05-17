@@ -1,26 +1,23 @@
 const { Op } = require('sequelize')
 
+const userChosenMeetingModel = require('../user-chosen-meeting/user-chosen-meeting.model')
 const model = require('./usulan-meeting.model')
 
 class UsulanMeetingService {
 
   async getAll(body) {
     body.form = typeof body.form === 'string' ? JSON.parse(body.form) : body.form
-    const where = {}
+    const where = []
 
     if (body.form['name']) {
-      where['name'] = { [Op.iLike]: `%${body.form['name']}%` }
+      where.push(`um.name iLike '%${body.form['name']}%'`)
     }
 
     if (body.form['class_id']) {
-      where['class_id'] = body.form['class_id']
+      where.push(`um.class_id = '${body.form['class_id']}'`)
     }
 
-    const offset = body.offset ? parseInt(body.offset) : 0
-    const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
-    const order = [body.order ? body.order : ['id', 'ASC']]
-
-    return await model.findAll({where, offset, limit, order})
+    return await model.sequelize.query(`SELECT um.name, um.description, um.start_date, um.end_date, c.name as class_name, (SELECT count(ucm.id) FROM "user_chosen_meeting" ucm WHERE ucm.usulan_meeting_id = um.id AND ucm.chosen_date IS NULL) as not_choose, (SELECT count(ucm.id) FROM "user_chosen_meeting" ucm WHERE ucm.usulan_meeting_id = um.id AND ucm.chosen_date IS NOT NULL) as choose FROM "usulan_meeting" um JOIN "class" c on um.class_id = c.id ${where.length > 0 ? 'WHERE ' + where.join(' AND ') : ''}`)
   }
 
   async getOne(id, raw=false) {
@@ -28,7 +25,29 @@ class UsulanMeetingService {
   }
 
   async create(bulk) {
-    return model.create(bulk)
+    const trx = await model.sequelize.transaction()
+    try {
+      const inserted = model.create(bulk);
+      const user = await userChosenMeetingModel.sequelize.query(`SELECT u.id FROM "user" u JOIN "user" u2 ON u.nis = u2.nis JOIN user_class uc on u2.id = uc.user_id WHERE u.role_id = 3 AND uc.id = ${bulk['class_id']}`)
+
+      if (user[0].length > 0) {
+        const userData = []
+        user[0].map(el => {
+          userData.push({
+            user_id: el.id,
+            usulan_meeting_id: inserted.id
+          })
+        })
+
+        await userChosenMeetingModel.bulkCreate(userData)
+      }
+
+      await trx.commit()
+      return inserted
+    } catch (err) {
+      console.log(err)
+      await trx.rollback()
+    }
   }
 
   async update(id, bulk) {
