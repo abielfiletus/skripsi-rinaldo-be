@@ -17,11 +17,8 @@ module.exports = db.sequelize.define(
       allowNull: false,
     },
     chosen_date: {
-      type: db.Sequelize.DATEONLY,
+      type: db.Sequelize.DATE,
       allowNull: false,
-    },
-    chosen_time: {
-      type: db.Sequelize.TIME,
     },
   }
 )
