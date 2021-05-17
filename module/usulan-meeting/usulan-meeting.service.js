@@ -32,11 +32,11 @@ class UsulanMeetingService {
 
       if (user[0].length > 0) {
         const userData = []
-        console.log(inserted)
+        const id = inserted.getDataValue('id')
         user[0].map(el => {
           userData.push({
             user_id: el.id,
-            usulan_meeting_id: inserted.id
+            usulan_meeting_id: id
           })
         })
 
