@@ -4,6 +4,7 @@ const controller = require('./usulan-meeting.controller')
 const router = new Express.Router()
 
 router.get('/', controller.getAll)
+router.get('/no-meeting', controller.getAllNotMeeting)
 router.get('/:id', controller.getOne)
 
 router.post('/', controller.create)
