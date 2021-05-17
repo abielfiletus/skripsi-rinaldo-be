@@ -25,7 +25,6 @@ class UsulanMeetingService {
   }
 
   async create(bulk) {
-    console.log(bulk)
     const trx = await model.sequelize.transaction()
     try {
       const inserted = await model.create(bulk, { transaction: trx });
