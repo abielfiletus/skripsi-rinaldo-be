@@ -38,7 +38,7 @@ class UserController {
     if (file) {
       const ext = (path.extname(file.name)).toLowerCase()
 
-      if (!['.jpg', '.jpeg', 'png'].includes(ext)) return outputParser.fail(res, 400, 'Validation Error', {avatar: 'extention not allowed'}, '')
+      if (!['.jpg', '.jpeg', '.png'].includes(ext)) return outputParser.fail(res, 400, 'Validation Error', {avatar: 'extention not allowed'}, '')
 
       clearName = fileSanitize(file.name)
     }

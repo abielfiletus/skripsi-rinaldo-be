@@ -32,6 +32,7 @@ class UsulanMeetingService {
 
       if (user[0].length > 0) {
         const userData = []
+        console.log(inserted)
         user[0].map(el => {
           userData.push({
             user_id: el.id,
