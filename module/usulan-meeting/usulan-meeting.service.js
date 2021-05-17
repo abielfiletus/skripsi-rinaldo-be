@@ -17,7 +17,7 @@ class UsulanMeetingService {
       where.push(`um.class_id = '${body.form['class_id']}'`)
     }
 
-    return await model.sequelize.query(`SELECT um.id, um.name, um.description, um.start_date, um.end_date, c.name as class_name, (SELECT count(ucm.id) FROM "user_chosen_meeting" ucm WHERE ucm.usulan_meeting_id = um.id AND ucm.chosen_date IS NULL) as not_choose, (SELECT count(ucm.id) FROM "user_chosen_meeting" ucm WHERE ucm.usulan_meeting_id = um.id AND ucm.chosen_date IS NOT NULL) as choose FROM "usulan_meeting" um JOIN "class" c on um.class_id = c.id WHERE c."createdBy" = '${body.form['user_id']}' ${where.join(' AND ')}`)
+    return await model.sequelize.query(`SELECT um.id, um.name, um.class_id, um.description, um.start_date, um.end_date, c.name as class_name, (SELECT count(ucm.id) FROM "user_chosen_meeting" ucm WHERE ucm.usulan_meeting_id = um.id AND ucm.chosen_date IS NULL) as not_choose, (SELECT count(ucm.id) FROM "user_chosen_meeting" ucm WHERE ucm.usulan_meeting_id = um.id AND ucm.chosen_date IS NOT NULL) as choose FROM "usulan_meeting" um JOIN "class" c on um.class_id = c.id WHERE c."createdBy" = '${body.form['user_id']}' ${where.join(' AND ')}`)
   }
 
   async getOne(id, raw=false) {
