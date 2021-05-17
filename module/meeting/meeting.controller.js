@@ -28,7 +28,7 @@ class MeetingController {
   async create(req, res, next) {
     try {
       const bulk = {
-        class_id: req.body.class_id ? req.body.class_id : null,
+        usulan_meeting_id: req.body.usulan_meeting_id ? req.body.usulan_meeting_id : null,
         start_date: req.body.start_date ? req.body.start_date : null,
         end_date: req.body.end_date ? req.body.end_date : null,
         link: req.body.link_meeting ? req.body.link_meeting : null,
@@ -45,7 +45,7 @@ class MeetingController {
   async update(req, res, next) {
     try {
       const bulk = {
-        class_id: req.body.class_id ? req.body.class_id : null,
+        usulan_meeting_id: req.body.usulan_meeting_id ? req.body.usulan_meeting_id : null,
         start_date: req.body.start_date ? req.body.start_date : null,
         end_date: req.body.end_date ? req.body.end_date : null,
         link: req.body.link_meeting ? req.body.link_meeting : null,

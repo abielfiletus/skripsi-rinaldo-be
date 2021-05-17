@@ -8,7 +8,7 @@ module.exports = db.sequelize.define(
       autoIncrement: true,
       primaryKey: true
     },
-    class_id: {
+    usulan_meeting_id: {
       type: db.Sequelize.INTEGER,
       allowNull: false
     },
