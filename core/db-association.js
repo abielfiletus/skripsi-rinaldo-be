@@ -8,6 +8,7 @@ const userModel = require('../module/user/user.model')
 const userClassHistoryModel = require('../module/user-class-history/user-class-history.model')
 const meetingModel = require('../module/meeting/meeting.model')
 const usulanMeetingModel = require('../module/usulan-meeting/usulan-meeting.model')
+const userChosenMeetingModel = require('../module/user-chosen-meeting/user-chosen-meeting.model')
 
 userModel.belongsTo(roleModel, { foreignKey: 'role_id', as: 'role' })
 userClassModel.belongsTo(classModel, { foreignKey: 'class_id', as: 'class' })
@@ -22,3 +23,4 @@ userClassHistoryModel.belongsTo(classMateriModel, { foreignKey: 'class_materi_id
 userClassHistoryModel.belongsTo(classQuizModel, { foreignKey: 'class_quiz_id', as: 'class_quiz' })
 meetingModel.belongsTo(usulanMeetingModel, { foreignKey: 'usulan_meeting_id', as: 'usulan_meeting' })
 usulanMeetingModel.belongsTo(classModel, { foreignKey: 'class_id', as: 'class' })
+userChosenMeetingModel.belongsTo(usulanMeetingModel, { foreignKey: 'usulan_meeting_id', as: 'usulan_meeting' })
