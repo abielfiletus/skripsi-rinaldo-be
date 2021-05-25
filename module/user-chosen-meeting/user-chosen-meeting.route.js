@@ -8,6 +8,7 @@ router.get('/orang-tua', controller.getAllOrtu)
 router.get('/:id', controller.getOne)
 
 router.post('/', controller.create)
+router.post('/register-usulan', controller.registerUsulan)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
 

@@ -50,6 +50,10 @@ class UserChosenMeetingService {
     return await model.findOne({ where: { id }, raw })
   }
 
+  async getOneByUserAndMeeting(user_id, usulan_meeting_id) {
+    return await model.findOne({ where: { user_id, usulan_meeting_id }, raw: true })
+  }
+
   async create(bulk) {
     return model.create(bulk)
   }
