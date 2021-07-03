@@ -5,6 +5,7 @@ const classModel = require('../class/class.model')
 const userModel = require('../user/user.model')
 const userClassModel = require('../user-class/user-class.model')
 const meetingModel = require('../meeting/meeting.model')
+const materiModel = require('../class-materi/class-materi.model')
 const usulanMeetingModel = require('../usulan-meeting/usulan-meeting.model')
 
 class DashboardService {
@@ -51,10 +52,74 @@ class DashboardService {
       }
     })
 
-    return {
-      murid: summaryMurid[0],
-      meeting
-    }
+    return { murid: summaryMurid[0], meeting: meeting }
+  }
+
+  async summaryGuru(body) {
+    const classlist = await classModel.findAll({ where: { createdBy: body.user_id }, raw: true })
+
+    const list = []
+    classlist.map(item => { list.push(item.id) })
+
+    const rawMateri = await materiModel.findAll({
+      where: { class_id: { [Op.in]: list } },
+      raw: true,
+      include: {
+        model: classModel,
+        as: 'class',
+      },
+    })
+    const materi = []
+    const ids = [];
+
+    rawMateri.map(item => {
+      const id = ids.indexOf(item.class_id);
+      if (id < 0) {
+        materi[ids.length] = {
+          class: {
+            id: item['class.id'],
+            name: item['class.name'],
+            code: item['class.code'],
+            start: item['class.start'],
+            end: item['class.end'],
+            nilai_lulus: item['class.nilai_lulus'],
+          },
+          materi: [
+            {
+              id: item.id,
+              name: item.name,
+              path: item.path,
+              class_id: item.class_id,
+            }
+          ]
+        }
+        ids.push(item.class_id);
+      } else {
+        materi[ids]['materi'] = {
+          id: item.id,
+          name: item.name,
+          path: item.path,
+          class_id: item.class_id,
+        }
+      }
+    })
+
+    const now = moment(moment.now()).startOf('days').format('YYYY-MM-DD HH:mm:ss')
+    const nextWeek = moment(moment.now()).add(2, "weeks").startOf('days').format('YYYY-MM-DD HH:mm:ss')
+    const meeting = await meetingModel.findAll({
+      where: { start_date: { [Op.between]: [now, nextWeek] } },
+      include: {
+        model: usulanMeetingModel,
+        as: 'usulan_meeting',
+        where: { class_id: { [Op.in]: list } },
+        include: {
+          model: classModel,
+          as: 'class'
+        }
+      }
+    })
+
+    return {materi: materi, meeting: meeting}
   }
 
 }
