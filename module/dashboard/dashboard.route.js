@@ -4,5 +4,6 @@ const controller = require('./dashboard.controller')
 const router = new Express.Router()
 
 router.get('/summary', controller.getSummary)
+router.get('/summary-orang-tua', controller.summaryOrangTua)
 
 module.exports = router

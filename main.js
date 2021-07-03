@@ -31,6 +31,7 @@ server.use(bodyParser.urlencoded({ extended: true }))
 server.use(fileUpload({ createParentPath: true }))
 
 server.use('/api/auth', authRouter)
+server.use('/api/dashboard', dashboardRouter)
 server.use('/assets/:folder/:filename', (req, res, next) => {
   try {
     return outputParser.file(res, 200, `${__dirname}/assets/${req.params['folder']}/${req.params.filename}`)
@@ -51,7 +52,7 @@ server.use('/api/user-chosen-meeting', userChosenMeetingRouter)
 server.use('/api/user-meeting-history', userMeetingHistoryRouter)
 server.use('/api/usulan-meeting', usulanMeetingRouter)
 server.use('/api/user-class', userClassRouter)
-server.use('/api/dashboard', dashboardRouter)
+// server.use('/api/dashboard', dashboardRouter)
 
 server.use((req, res) => {
   return outputParser.fail(res, 404, 'Request path not found', '')
