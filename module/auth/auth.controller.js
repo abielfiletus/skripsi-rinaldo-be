@@ -35,7 +35,7 @@ class AuthController {
       if (!check.success) return outputParser.fail(res, 400, 'Email tidak ditemukan', '', '')
  
       const id = check.data['id']
-      const bulk = { password: check.data['tanggal_lahir'].replace(/[\-]/, '') } 
+      const bulk = { password: check.data['tanggal_lahir'].replace(/[\-]/g, '') } 
 
       await service.update(id, bulk)
 
