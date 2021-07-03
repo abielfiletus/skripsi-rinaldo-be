@@ -33,18 +33,11 @@ class AuthController {
       const check = await service.getOneByEmailPass(req.body.email)
 
       if (!check.success) return outputParser.fail(res, 400, 'Email tidak ditemukan', '', '')
-
-      const pass = check.data['tanggal_lahir'].replace(/[\-]/, '')
+ 
       const id = check.data['id']
-      const nama_depan = check.data['nama_depan']
-      const nama_belakang = check.data['nama_belakang']
-      const jenis_kelamin = check.data['jenis_kelamin']
-      const status_pekerjaan = check.data['status_pekerjaan']
-      const tanggal_lahir = check.data['tanggal_lahir']
-      const no_hp = check.data['no_hp']
-      const email = check.data['email']
+      const bulk = { password: check.data['tanggal_lahir'].replace(/[\-]/, '') } 
 
-      await service.update(id, nama_depan, nama_belakang, jenis_kelamin, status_pekerjaan, tanggal_lahir, no_hp, email, pass)
+      await service.update(id, bulk)
 
       return outputParser.success(res, 200, 'Successfully Reset Password', '')
     } catch (err) {
