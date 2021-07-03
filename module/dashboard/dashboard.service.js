@@ -94,13 +94,14 @@ class DashboardService {
           ]
         }
         ids.push(item.class_id);
+        console.log(materi)
       } else {
-        materi[ids]['materi'] = {
+        materi[id]['materi'].push({
           id: item.id,
           name: item.name,
           path: item.path,
           class_id: item.class_id,
-        }
+        })
       }
     })
 
