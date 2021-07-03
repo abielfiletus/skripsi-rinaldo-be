@@ -45,9 +45,9 @@ class DashboardService {
       include: {
         model: usulanMeetingModel,
         as: 'usulan_meeting',
-        // where: {
-        //   class_id: classMurid.class_id
-        // }
+        where: {
+          class_id: classMurid.class_id
+        }
       }
     })
 
