@@ -153,13 +153,13 @@ class ClassQuizService {
         }
       } else {
         data.soal.push({
-          id: el.class_quiz_id,
-          soal: el.soal,
-          jawaban_a: el.jawaban_a,
-          jawaban_b: el.jawaban_b,
-          jawaban_c: el.jawaban_c,
-          jawaban_d: el.jawaban_d,
-          jawaban_e: el.jawaban_e,
+          id: rowData[i].class_quiz_id,
+          soal: rowData[i].soal,
+          jawaban_a: rowData[i].jawaban_a,
+          jawaban_b: rowData[i].jawaban_b,
+          jawaban_c: rowData[i].jawaban_c,
+          jawaban_d: rowData[i].jawaban_d,
+          jawaban_e: rowData[i].jawaban_e,
         })
       }
     }
