@@ -129,23 +129,25 @@ class ClassQuizService {
     rowData = randArray(rowData)
     let data = {}
 
-    rowData.map((el, i) => {
-      if (i == 0) {
+    const length = rowData.length > 10 ? 10 : rowData.length;
+
+    for (let i = 0; i < length; i++) {
+      if (i < 1) {
         data = {
-          id: el.id,
-          name: el.name,
-          total_soal: el.total_soal,
-          nilai_lulus: el.nilai_lulus,
-          class_materi_id: el.class_materi_id,
+          id: rowData[i].id,
+          name: rowData[i].name,
+          total_soal: rowData[i].total_soal,
+          nilai_lulus: rowData[i].nilai_lulus,
+          class_materi_id: rowData[i].class_materi_id,
           soal: [
             {
-              id: el.class_quiz_id,
-              soal: el.soal,
-              jawaban_a: el.jawaban_a,
-              jawaban_b: el.jawaban_b,
-              jawaban_c: el.jawaban_c,
-              jawaban_d: el.jawaban_d,
-              jawaban_e: el.jawaban_e,
+              id: rowData[i].class_quiz_id,
+              soal: rowData[i].soal,
+              jawaban_a: rowData[i].jawaban_a,
+              jawaban_b: rowData[i].jawaban_b,
+              jawaban_c: rowData[i].jawaban_c,
+              jawaban_d: rowData[i].jawaban_d,
+              jawaban_e: rowData[i].jawaban_e,
             }
           ]
         }
@@ -160,7 +162,7 @@ class ClassQuizService {
           jawaban_e: el.jawaban_e,
         })
       }
-    })
+    }
 
     return data
   }
