@@ -43,7 +43,9 @@ class UserController {
       clearName = fileSanitize(file.name)
     }
     try {
-      await file.mv('./assets/avatar/' + clearName)
+      if (file) {
+        await file.mv('./assets/avatar/' + clearName)
+      }
 
       const bulk = {
         name: req.body.name ? req.body.name : null,
@@ -84,7 +86,9 @@ class UserController {
       clearName = fileSanitize(file.name)
     }
     try {
-      await file.mv('./assets/avatar/' + clearName)
+      if (file) {
+        await file.mv('./assets/avatar/' + clearName)
+      }
 
       const bulk = {
         name: req.body.name ? req.body.name : null,
