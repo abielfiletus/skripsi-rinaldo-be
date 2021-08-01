@@ -67,6 +67,7 @@ class DashboardService {
       include: {
         model: classModel,
         as: 'class',
+        where: { end: {[Op.lte]: moment(body.date, 'YYYY-MM-DD')} }
       },
     })
     const materi = []
@@ -94,7 +95,6 @@ class DashboardService {
           ]
         }
         ids.push(item.class_id);
-        console.log(materi)
       } else {
         materi[id]['materi'].push({
           id: item.id,
