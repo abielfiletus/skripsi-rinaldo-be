@@ -57,7 +57,7 @@ class DashboardService {
 
   async summaryGuru(body) {
     const classlist = await classModel.findAll({
-      where: { createdBy: body.user_id, end: {[Op.lte]: moment(body.date, 'YYYY-MM-DD')} },
+      where: { createdBy: body.user_id, end: {[Op.gte]: moment(body.date, 'YYYY-MM-DD')} },
       raw: true
     })
 
