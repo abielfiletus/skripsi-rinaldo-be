@@ -56,7 +56,10 @@ class DashboardService {
   }
 
   async summaryGuru(body) {
-    const classlist = await classModel.findAll({ where: { createdBy: body.user_id }, raw: true })
+    const classlist = await classModel.findAll({
+      where: { createdBy: body.user_id, end: {[Op.lte]: moment(body.date, 'YYYY-MM-DD')} },
+      raw: true
+    })
 
     const list = []
     classlist.map(item => { list.push(item.id) })
@@ -66,8 +69,7 @@ class DashboardService {
       raw: true,
       include: {
         model: classModel,
-        as: 'class',
-        where: { end: {[Op.lte]: moment(body.date, 'YYYY-MM-DD')} }
+        as: 'class'
       },
     })
     const materi = []
