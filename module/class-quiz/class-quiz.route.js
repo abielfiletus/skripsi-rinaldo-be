@@ -12,7 +12,7 @@ router.post('/', controller.create)
 router.post('/detail-quiz', controller.createDetailSoal)
 router.post('/submit-quiz', controller.submitQuiz)
 router.put('/:id', controller.update)
-router.put('/detail-quiz/:id', controller.getOneDetailSoal)
+router.put('/detail-quiz/:id', controller.updateDetailSoal)
 router.delete('/:id', controller.delete)
 router.delete('/quiz-detail/:id', controller.deleteSoal)
 
