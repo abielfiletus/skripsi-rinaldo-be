@@ -40,7 +40,7 @@ class UserChosenMeetingService {
         include: {
           model: classModel,
           as: 'class',
-          where: { end: { [Op.lte]: moment(moment.now()).endOf('days') } }
+          where: { end: { [Op.gte]: moment(moment.now()).endOf('days') } }
         },
         raw: true,
       })
