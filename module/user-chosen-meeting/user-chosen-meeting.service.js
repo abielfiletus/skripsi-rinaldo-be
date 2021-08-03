@@ -44,7 +44,7 @@ class UserChosenMeetingService {
         },
         raw: true,
       })
-      where['usulan_meeting.class.id$'] = userClass['class.id']
+      where['$usulan_meeting.class.id$'] = userClass['class.id']
     }
 
     if (body.form['usulan_meeting_id']) {
