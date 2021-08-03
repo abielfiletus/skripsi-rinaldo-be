@@ -29,10 +29,6 @@ class UserChosenMeetingService {
       where['user_id'] = body.form.user_id
     }
 
-    if (body.form['nis']) {
-      where['$usulan_meeting.class.user_class.user.nis$'] = body.form.nis
-    }
-
     if (body.form['usulan_meeting_id']) {
       where['usulan_meeting_id'] = body.form.usulan_meeting_id
     }
@@ -51,7 +47,8 @@ class UserChosenMeetingService {
           as: 'user_class',
           include: {
             model: userModel,
-            as: 'user'
+            as: 'user',
+            where: body.form['nis'] ? {nis: body.form.nis} : {}
           }
         }
       }
