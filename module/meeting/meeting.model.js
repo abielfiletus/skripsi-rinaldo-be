@@ -13,11 +13,11 @@ module.exports = db.sequelize.define(
       allowNull: false
     },
     start_date: {
-      type: db.Sequelize.DATEONLY,
+      type: db.Sequelize.DATE,
       allowNull: false,
     },
     end_date: {
-      type: db.Sequelize.DATEONLY,
+      type: db.Sequelize.DATE,
       allowNull: false,
     },
     link: {

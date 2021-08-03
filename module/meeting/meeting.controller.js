@@ -1,5 +1,3 @@
-const moment = require('moment')
-
 const service = require('./meeting.service')
 const outputParser = require('../../utils/output-parser')
 
@@ -43,11 +41,11 @@ class MeetingController {
     try {
       const bulk = {
         usulan_meeting_id: req.body.usulan_meeting_id ? req.body.usulan_meeting_id : null,
-        start_date: req.body.start_date ? moment(req.body.start_date, 'YYYY-MM-DD HH:mm') : null,
-        end_date: req.body.end_date ? moment(req.body.end_date, 'YYYY-MM-DD HH:mm') : null,
+        start_date: req.body.start_date ? req.body.start_date : null,
+        end_date: req.body.end_date ? req.body.end_date : null,
         link: req.body.link_meeting ? req.body.link_meeting : null,
       }
-      console.log(bulk)
+
       const data = await service.create(bulk)
 
       return outputParser.success(res, 201, 'Successfully Insert Data', data)
@@ -60,8 +58,8 @@ class MeetingController {
     try {
       const bulk = {
         usulan_meeting_id: req.body.usulan_meeting_id ? req.body.usulan_meeting_id : null,
-        start_date: req.body.start_date ? moment(req.body.start_date, 'YYYY-MM-DD HH:mm') : null,
-        end_date: req.body.end_date ? moment(req.body.end_date, 'YYYY-MM-DD HH:mm') : null,
+        start_date: req.body.start_date ? req.body.start_date : null,
+        end_date: req.body.end_date ? req.body.end_date : null,
         link: req.body.link_meeting ? req.body.link_meeting : null,
       }
 
