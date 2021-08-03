@@ -4,6 +4,7 @@ const controller = require('./meeting.controller')
 const router = new Express.Router()
 
 router.get('/', controller.getAll)
+router.get('/orang-tua', controller.getAllOrtu)
 router.get('/:id', controller.getOne)
 
 router.post('/', controller.create)
