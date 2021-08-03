@@ -45,7 +45,7 @@ class MeetingController {
         end_date: req.body.end_date ? req.body.end_date : null,
         link: req.body.link_meeting ? req.body.link_meeting : null,
       }
-
+      console.log(bulk)
       const data = await service.create(bulk)
 
       return outputParser.success(res, 201, 'Successfully Insert Data', data)
