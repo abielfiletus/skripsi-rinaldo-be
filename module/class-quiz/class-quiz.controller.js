@@ -80,6 +80,31 @@ class ClassQuizController {
     }
   }
 
+  async updateDetailSoal(req, res, next) {
+    try {
+      const check = await service.getOneDetailSoal(req.body.class_quiz_id, true)
+
+      if (!check) return outputParser.fail(res, 400, 'Validation Error', { id: 'Tidak ditemukan' }, '')
+
+      const bulk = {
+        class_quiz_id: req.body.class_quiz_id ? req.body.class_quiz_id : null,
+        soal: req.body.soal ? req.body.soal : null,
+        jawaban_a: req.body.jawaban_a ? req.body.jawaban_a : null,
+        jawaban_b: req.body.jawaban_b ? req.body.jawaban_b : null,
+        jawaban_c: req.body.jawaban_c ? req.body.jawaban_c : null,
+        jawaban_d: req.body.jawaban_d ? req.body.jawaban_d : null,
+        jawaban_e: req.body.jawaban_e ? req.body.jawaban_e : null,
+        jawaban_benar: req.body.jawaban_benar ? req.body.jawaban_benar : null,
+      }
+
+      const data = await service.updateDetailSoal(req.params.id, bulk)
+
+      return outputParser.success(res, 200, 'Successfully Update Data', data)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   async update(req, res, next) {
     try {
       const bulk = {

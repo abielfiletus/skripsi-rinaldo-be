@@ -69,6 +69,10 @@ class ClassQuizService {
     return quizDetailModel.create(bulk);
   }
 
+  async updateDetailSoal(id, bulk) {
+    return quizDetailModel.update(bulk, { where: { id } });
+  }
+
   async update(id, bulk) {
     const trx = await classQuizModel.sequelize.transaction()
 
