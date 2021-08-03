@@ -37,7 +37,7 @@ class DashboardService {
       raw: true,
     })
 
-    const summaryMurid = await model.sequelize.query(`SELECT uc.id, sum(uch.nilai) as nilai, sum(uch.durasi) as durasi, (CASE WHEN sum(uch.nilai) is null THEN null WHEN (select nilai_lulus from class where id = '${classMurid.class_id}') < sum(uch.nilai) THEN 'Lulus' ELSE 'Tidak Lulus' END) as status from user_class uc LEFT JOIN user_class_history uch on uch.user_id = uc.id WHERE uc.user_id = '${murid.id}' and uc.class_id = '${classMurid.class_id}' group by 1`);
+    const summaryMurid = await model.sequelize.query(`SELECT uc.id, sum(uch.nilai) as nilai, sum(uch.durasi) as durasi, (CASE WHEN sum(uch.nilai) is null THEN null WHEN (select nilai_lulus from class where id = '${classMurid.class_id}') < sum(uch.nilai) THEN 'Lulus' ELSE 'Tidak Lulus' END) as status from user_class uc LEFT JOIN user_class_history uch on uch.user_id = uc.user_id WHERE uc.user_id = '${murid.id}' and uc.class_id = '${classMurid.class_id}' group by 1`);
 
     const now = moment(moment.now()).startOf('days').format('YYYY-MM-DD HH:mm:ss')
     const nextWeek = moment(moment.now()).add(2, "weeks").startOf('days').format('YYYY-MM-DD HH:mm:ss')
