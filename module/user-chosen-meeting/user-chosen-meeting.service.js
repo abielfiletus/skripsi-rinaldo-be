@@ -1,5 +1,7 @@
 const usulanMeetingModel = require('../usulan-meeting/usulan-meeting.model')
 const classModel = require('../class/class.model')
+const userClassModel = require('../user-class/user-class.model')
+const userModel = require('../user/user.model')
 const model = require('./user-chosen-meeting.model')
 
 class UserChosenMeetingService {
@@ -27,6 +29,10 @@ class UserChosenMeetingService {
       where['user_id'] = body.form.user_id
     }
 
+    if (body.form['nis']) {
+      where['$usulan_meeting.class.user_class.user.nis$'] = body.form.nis
+    }
+
     if (body.form['usulan_meeting_id']) {
       where['usulan_meeting_id'] = body.form.usulan_meeting_id
     }
@@ -39,7 +45,15 @@ class UserChosenMeetingService {
       as: 'usulan_meeting',
       include: {
         model: classModel,
-        as: 'class'
+        as: 'class',
+        include: {
+          model: userClassModel,
+          as: 'user_class',
+          include: {
+            model: userModel,
+            as: 'user'
+          }
+        }
       }
     }
 

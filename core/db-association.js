@@ -12,6 +12,7 @@ const userChosenMeetingModel = require('../module/user-chosen-meeting/user-chose
 
 userModel.belongsTo(roleModel, { foreignKey: 'role_id', as: 'role' })
 userClassModel.belongsTo(classModel, { foreignKey: 'class_id', as: 'class' })
+classModel.hasMany(userClassModel, { foreignKey: 'class_id', as: 'user_class' })
 userClassModel.belongsTo(userModel, { foreignKey: 'user_id', as: 'user' })
 classMateriModel.belongsTo(classModel, { foreignKey: 'class_id', as: 'class' })
 // classMateriModel.hasOne(classQuizModel, { foreignKey: 'class_id', as: 'quiz' })
