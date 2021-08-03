@@ -45,10 +45,12 @@ class UserChosenMeetingService {
         include: {
           model: userClassModel,
           as: 'user_class',
+          required: true,
           include: {
             model: userModel,
             as: 'user',
-            where: body.form['nis'] ? {nis: body.form.nis} : {}
+            where: body.form['nis'] ? {nis: body.form.nis} : {},
+            required: true,
           }
         }
       }
