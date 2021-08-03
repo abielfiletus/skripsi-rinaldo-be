@@ -1,3 +1,6 @@
+const { Op } = require('sequelize')
+const moment = require('moment')
+
 const usulanMeetingModel = require('../usulan-meeting/usulan-meeting.model')
 const classModel = require('../class/class.model')
 const userClassModel = require('../user-class/user-class.model')
@@ -29,6 +32,21 @@ class UserChosenMeetingService {
       where['user_id'] = body.form.user_id
     }
 
+    if (body.form['nis']) {
+      const user = await userModel.findOne({ where: { nis: body.form.nis }, raw: true })
+
+      const userClass = await userClassModel.findOne({
+        where: { user_id: user.id },
+        include: {
+          model: classModel,
+          as: 'class',
+          where: { end: { [Op.lte]: moment(moment.now()).endOf('days') } }
+        },
+        raw: true,
+      })
+      where['$class.id$'] = userClass['class.id']
+    }
+
     if (body.form['usulan_meeting_id']) {
       where['usulan_meeting_id'] = body.form.usulan_meeting_id
     }
@@ -42,17 +60,6 @@ class UserChosenMeetingService {
       include: {
         model: classModel,
         as: 'class',
-        include: {
-          model: userClassModel,
-          as: 'user_class',
-          required: true,
-          include: {
-            model: userModel,
-            as: 'user',
-            where: body.form['nis'] ? {nis: body.form.nis} : {},
-            required: true,
-          }
-        }
       }
     }
 
