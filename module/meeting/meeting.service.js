@@ -51,7 +51,6 @@ class MeetingService {
       },
       raw: true,
     })
-    where['class_id'] = userClass['class.id']
 
     const offset = body.offset ? parseInt(body.offset) : 0
     const limit = body.length && body.length > 0 ? parseInt(body.length) : 10000000
@@ -59,6 +58,7 @@ class MeetingService {
     const include = {
       model: usulanMeetingModel,
       as: 'usulan_meeting',
+      where: { class_id: userClass['class.id'] },
       include: {
         model: classModel,
         as: 'class'
