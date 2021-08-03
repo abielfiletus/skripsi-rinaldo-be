@@ -119,7 +119,7 @@ class ClassQuizService {
 
   async getRandSoal(id) {
     let rowData = await quizDetailModel.sequelize.query(
-      `SELECT cq.id, cq.name, cq.total_soal, cq.nilai_lulus, cq.class_materi_id, qd.id AS class_quiz_id, qd.soal, qd.jawaban_a, qd.jawaban_b, qd.jawaban_c, qd.jawaban_d, qd.jawaban_e FROM class_quiz AS cq JOIN quiz_detail AS qd ON cq.id = qd.class_quiz_id WHERE cq.class_materi_id = ?`,
+      `SELECT cq.id, cq.name, cq.total_soal, cq.nilai_lulus, cq.class_materi_id, qd.id AS class_quiz_id, qd.soal, qd.jawaban_a, qd.jawaban_b, qd.jawaban_c, qd.jawaban_d, qd.jawaban_e FROM class_quiz AS cq JOIN quiz_detail AS qd ON cq.id = qd.class_quiz_id WHERE cq.id = ?`,
       {
         replacements: [id],
         type: QueryTypes.SELECT
