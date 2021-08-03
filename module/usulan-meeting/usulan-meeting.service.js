@@ -32,7 +32,7 @@ class UsulanMeetingService {
     const trx = await model.sequelize.transaction()
     try {
       const inserted = await model.create(bulk, { transaction: trx });
-      const user = await userChosenMeetingModel.sequelize.query(`SELECT u.id FROM "user" u JOIN "user" u2 ON u.nis = u2.nis JOIN user_class uc on u2.id = uc.user_id WHERE u.role_id = 3 AND uc.id = ${bulk['class_id']}`)
+      const user = await userChosenMeetingModel.sequelize.query(`SELECT u.id FROM "user" u JOIN "user" u2 ON u.nis = u2.nis JOIN user_class uc on u2.id = uc.user_id WHERE u.role_id = 3 AND uc.class_id = ${bulk['class_id']}`)
 
       if (user[0].length > 0) {
         const userData = []
