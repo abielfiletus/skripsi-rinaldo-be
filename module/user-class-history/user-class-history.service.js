@@ -1,3 +1,4 @@
+const moment = require('moment')
 const model = require('./user-class-history.model')
 
 class UserClassHistoryService {
@@ -15,7 +16,7 @@ class UserClassHistoryService {
     }
 
     if (body.form['start']) {
-      where.push(`uch."createdAt" BETWEEN '${body.form['start']}' AND '${body.form['end']}'`)
+      where.push(`uch."createdAt" BETWEEN '${moment(body.form['start'], 'YYYY-MM-DD').startOf('day')}' AND '${moment(body.form['end'], 'YYYY-MM-DD').endOf('day')}'`)
     }
 
     if (body.form['class_materi_id']) {
